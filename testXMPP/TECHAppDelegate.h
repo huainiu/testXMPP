@@ -3,7 +3,7 @@
 //  testXMPP
 //
 //  Created by yangjiannan on 4/23/13.
-//  Copyright (c) 2013 techrare. All rights reserved.
+//  Copyright (c) 2013 techrare. All rights reserved.ddd
 //
 
 #import <UIKit/UIKit.h>
