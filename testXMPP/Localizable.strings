@@ -1,0 +1,10 @@
+/* 
+  Localized.strings
+  testXMPP
+
+  Created by yangjiannan on 5/2/13.
+  Copyright (c) 2013 techrare. All rights reserved.
+*/
+"available"="在線";
+"away"="離開";
+"Offline"="離線";
