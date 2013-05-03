@@ -138,6 +138,13 @@
 		F250C985172BD2380056E629 /* XMPPMessage+XEP_0224.m in Sources */ = {isa = PBXBuildFile; fileRef = F250C93E172BD2380056E629 /* XMPPMessage+XEP_0224.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F250C997172BDAA10056E629 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F250C996172BDAA10056E629 /* CoreData.framework */; };
 		F250C999172BDAAC0056E629 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F250C998172BDAAC0056E629 /* CoreLocation.framework */; };
+		F25220FF173355E100AE5331 /* ChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F25220FD173355E100AE5331 /* ChatView.m */; };
+		F2522100173355E100AE5331 /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F25220FE173355E100AE5331 /* ChatView.xib */; };
+		F252212B1733670C00AE5331 /* KBPopupBubbleView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = F25221251733670C00AE5331 /* KBPopupBubbleView+Animations.m */; };
+		F252212C1733670C00AE5331 /* KBPopupBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F25221271733670C00AE5331 /* KBPopupBubbleView.m */; };
+		F252212D1733670C00AE5331 /* KBPopupDrawableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F25221291733670C00AE5331 /* KBPopupDrawableView.m */; };
+		F252212F1733672B00AE5331 /* readme.strings in Resources */ = {isa = PBXBuildFile; fileRef = F252212E1733672B00AE5331 /* readme.strings */; };
+		F2522131173367E400AE5331 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2522130173367E400AE5331 /* QuartzCore.framework */; };
 		F2537481172B866B001391B4 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2537480172B866B001391B4 /* libxml2.dylib */; };
 		F2537483172B867B001391B4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2537482172B867B001391B4 /* CFNetwork.framework */; };
 		F2537487172B873B001391B4 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2537486172B873B001391B4 /* libresolv.dylib */; };
@@ -405,6 +412,18 @@
 		F250C998172BDAAC0056E629 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F250C99E172BDDFC0056E629 /* Toast+UIView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
 		F250C99F172BDDFC0056E629 /* Toast+UIView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
+		F25220FC173355E100AE5331 /* ChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatView.h; sourceTree = "<group>"; };
+		F25220FD173355E100AE5331 /* ChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatView.m; sourceTree = "<group>"; };
+		F25220FE173355E100AE5331 /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
+		F25221241733670C00AE5331 /* KBPopupBubbleView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KBPopupBubbleView+Animations.h"; sourceTree = "<group>"; };
+		F25221251733670C00AE5331 /* KBPopupBubbleView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KBPopupBubbleView+Animations.m"; sourceTree = "<group>"; };
+		F25221261733670C00AE5331 /* KBPopupBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopupBubbleView.h; sourceTree = "<group>"; };
+		F25221271733670C00AE5331 /* KBPopupBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPopupBubbleView.m; sourceTree = "<group>"; };
+		F25221281733670C00AE5331 /* KBPopupDrawableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopupDrawableView.h; sourceTree = "<group>"; };
+		F25221291733670C00AE5331 /* KBPopupDrawableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPopupDrawableView.m; sourceTree = "<group>"; };
+		F252212A1733670C00AE5331 /* KBPopupHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPopupHeaders.h; sourceTree = "<group>"; };
+		F252212E1733672B00AE5331 /* readme.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = readme.strings; sourceTree = "<group>"; };
+		F2522130173367E400AE5331 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F2537480172B866B001391B4 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		F2537482172B867B001391B4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F2537484172B86F4001391B4 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -418,6 +437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2522131173367E400AE5331 /* QuartzCore.framework in Frameworks */,
 				F250C999172BDAAC0056E629 /* CoreLocation.framework in Frameworks */,
 				F250C997172BDAA10056E629 /* CoreData.framework in Frameworks */,
 				F253748F172B87B3001391B4 /* SystemConfiguration.framework in Frameworks */,
@@ -438,6 +458,7 @@
 		F20DA2F317262A3400000ECE = {
 			isa = PBXGroup;
 			children = (
+				F2522130173367E400AE5331 /* QuartzCore.framework */,
 				F20DA30817262A3400000ECE /* testXMPP */,
 				F20DA30117262A3400000ECE /* Frameworks */,
 				F20DA2FF17262A3400000ECE /* Products */,
@@ -473,6 +494,7 @@
 		F20DA30817262A3400000ECE /* testXMPP */ = {
 			isa = PBXGroup;
 			children = (
+				F25221231733670C00AE5331 /* KBPopupBubble */,
 				F2537684172BC012001391B4 /* XMPP */,
 				F20DA33E17265E2F00000ECE /* image */,
 				F20DA32617262B1A00000ECE /* resources */,
@@ -510,6 +532,8 @@
 				F20DA33217262CFA00000ECE /* ContactViewController.m */,
 				F250C885172BCB940056E629 /* LoginViewController.h */,
 				F250C886172BCB940056E629 /* LoginViewController.m */,
+				F25220FC173355E100AE5331 /* ChatView.h */,
+				F25220FD173355E100AE5331 /* ChatView.m */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -520,6 +544,7 @@
 				F23B63F9173253230037190B /* Localizable.strings */,
 				F250C887172BCB940056E629 /* LoginViewController.xib */,
 				F20DA32917262B4900000ECE /* ChatViewController.xib */,
+				F25220FE173355E100AE5331 /* ChatView.xib */,
 				F20DA33317262CFA00000ECE /* ContactViewController.xib */,
 			);
 			name = resources;
@@ -1155,10 +1180,24 @@
 			path = "XEP-0224";
 			sourceTree = "<group>";
 		};
+		F25221231733670C00AE5331 /* KBPopupBubble */ = {
+			isa = PBXGroup;
+			children = (
+				F25221241733670C00AE5331 /* KBPopupBubbleView+Animations.h */,
+				F25221251733670C00AE5331 /* KBPopupBubbleView+Animations.m */,
+				F25221261733670C00AE5331 /* KBPopupBubbleView.h */,
+				F25221271733670C00AE5331 /* KBPopupBubbleView.m */,
+				F25221281733670C00AE5331 /* KBPopupDrawableView.h */,
+				F25221291733670C00AE5331 /* KBPopupDrawableView.m */,
+				F252212A1733670C00AE5331 /* KBPopupHeaders.h */,
+				F252212E1733672B00AE5331 /* readme.strings */,
+			);
+			path = KBPopupBubble;
+			sourceTree = "<group>";
+		};
 		F2537684172BC012001391B4 /* XMPP */ = {
 			isa = PBXGroup;
 			children = (
-				F250C986172BD28B0056E629 /* XMPPFramework.h */,
 				F250C6FE172BC1080056E629 /* Authentication */,
 				F250C712172BC1080056E629 /* Categories */,
 				F250C719172BC1080056E629 /* Core */,
@@ -1166,6 +1205,7 @@
 				F250C7EF172BC1080056E629 /* Vendor */,
 				F23B63EF1731FA5C0037190B /* IOSXMPPAppDelegate.h */,
 				F23B63F01731FA5C0037190B /* IOSXMPPAppDelegate.m */,
+				F250C986172BD28B0056E629 /* XMPPFramework.h */,
 			);
 			name = XMPP;
 			sourceTree = "<group>";
@@ -1235,6 +1275,8 @@
 				F250C889172BCB940056E629 /* LoginViewController.xib in Resources */,
 				F23B63F8173251DA0037190B /* defaultPerson.png in Resources */,
 				F23B63FA173253230037190B /* Localizable.strings in Resources */,
+				F2522100173355E100AE5331 /* ChatView.xib in Resources */,
+				F252212F1733672B00AE5331 /* readme.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1357,6 +1399,10 @@
 				F250C984172BD2380056E629 /* XMPPAttentionModule.m in Sources */,
 				F250C985172BD2380056E629 /* XMPPMessage+XEP_0224.m in Sources */,
 				F23B63F11731FA5C0037190B /* IOSXMPPAppDelegate.m in Sources */,
+				F25220FF173355E100AE5331 /* ChatView.m in Sources */,
+				F252212B1733670C00AE5331 /* KBPopupBubbleView+Animations.m in Sources */,
+				F252212C1733670C00AE5331 /* KBPopupBubbleView.m in Sources */,
+				F252212D1733670C00AE5331 /* KBPopupDrawableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

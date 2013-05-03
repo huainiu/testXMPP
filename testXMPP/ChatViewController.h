@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatViewController : UIViewController
+@interface ChatViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
+@property(retain, nonatomic)IBOutlet UITableView *chatTableView;
+@property (retain, nonatomic) IBOutlet UITextField *msgText;
+@property (retain, nonatomic) IBOutlet UIButton *sendMsgBtn;
+
+-(IBAction)sendMsgAction:(id)sender;
 @end

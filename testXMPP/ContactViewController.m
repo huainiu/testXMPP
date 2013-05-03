@@ -11,6 +11,7 @@
 #import "IOSXMPPAppDelegate.h"
 #import "LoginViewController.h"
 #import "ChatViewController.h"
+#import "ChatView.h"
 
 #import "DDLog.h"
 #import <QuartzCore/QuartzCore.h>
@@ -185,9 +186,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark -- UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChatViewController *chatViewCtl = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+//    ChatViewController *chatViewCtl = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+//    [self.navigationController pushViewController:chatViewCtl animated:YES];
+//    [chatViewCtl release];
+    
+    ChatView *chatViewCtl = [[ChatView alloc] initWithNibName:@"ChatView" bundle:nil];
     [self.navigationController pushViewController:chatViewCtl animated:YES];
     [chatViewCtl release];
+
 }
 
 
