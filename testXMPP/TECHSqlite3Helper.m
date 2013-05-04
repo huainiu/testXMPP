@@ -84,14 +84,20 @@ static NSString *dbFilePath = @"invision_im.db";
 -(void)insertMessage:(NSDictionary *)record table:(NSString *)tableName error:(char **)error
 {
     char *sql = "insert into messageTable(receiver, sender, messageContent, recordTime, readed) values(?,"
-    "?, ?, ?, ?)";
+    "?, ?, datetime(), ?)";
     sqlite3_stmt *stmt;
     sqlite3 *database = [self openDB];
     if(sqlite3_prepare(database, sql, -1, &stmt, nil)==SQLITE_OK)
     {
-            sqlite3_bind_text(stmt, -1, <#const char *#>, <#int n#>, <#void (*)(void *)#>)
+        sqlite3_bind_text(stmt, 1, [(NSString *)[record  objectForKey:@"receiver"] UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 2, [[record objectForKey:@"sender"] UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 3, [[record objectForKey:@"messageContent"] UTF8String], -1, nil);
+        sqlite3_bind_int(stmt, 5, (NSInteger)[record objectForKey:@"readed"]);
     }
-    
+    if (sqlite3_step(stmt)!=SQLITE_DONE)
+    {
+        NSAssert(0, @"插入一條信息失敗");
+    }
     sqlite3_finalize(stmt);
     sqlite3_close(database);
 }
