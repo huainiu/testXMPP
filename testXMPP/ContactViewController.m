@@ -92,9 +92,36 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [loginCtl release];
         }
     }
+    //有消息發送來時，在tableView 相應的行顯示消息數
+    [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom" options:NSKeyValueObservingOptionNew  context:nil];
+    
 }
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillDisappear:(BOOL)animated
 {
+    [self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom"];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    XMPPUserCoreDataStorageObject *messageFrom = (XMPPUserCoreDataStorageObject *)[change objectForKey:@"new"];
+    
+
+    
+    
+    UITableViewCell *cell = nil;
+    
+    if(cell)
+    {
+        UILabel *msgBadgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(280, 3.0, 10, 10)];
+        msgBadgeLabel.text = @"10";
+        msgBadgeLabel.layer.borderColor = [[UIColor redColor] CGColor];
+        msgBadgeLabel.layer.borderWidth = 3;
+        msgBadgeLabel.layer.cornerRadius = 45;
+        msgBadgeLabel.clipsToBounds = YES;
+
+        
+        [cell addSubview:msgBadgeLabel];
+    }
     
 }
 
@@ -186,11 +213,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark -- UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    ChatViewController *chatViewCtl = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
-//    [self.navigationController pushViewController:chatViewCtl animated:YES];
-//    [chatViewCtl release];
     
     ChatView *chatViewCtl = [[ChatView alloc] initWithNibName:@"ChatView" bundle:nil];
+    chatViewCtl.userInfo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    chatViewCtl.iOSXMPPAppDelegate = self.iOSXMPPAppDelegate;
     [self.navigationController pushViewController:chatViewCtl animated:YES];
     [chatViewCtl release];
 
@@ -232,6 +258,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	if (sectionIndex < [sections count])
 	{
 		id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:sectionIndex];
+        
 		return sectionInfo.numberOfObjects;
 	}
 	
@@ -247,7 +274,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
 	}
-	
+
 	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	
 	cell.textLabel.text = user.displayName;

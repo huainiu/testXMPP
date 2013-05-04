@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "279"
-         endingLineNumber = "279"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "-connect"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "395"
-         endingLineNumber = "395"
+         startingLineNumber = "399"
+         endingLineNumber = "399"
          landmarkName = "-xmppStreamDidConnect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "409"
-         endingLineNumber = "409"
+         startingLineNumber = "413"
+         endingLineNumber = "413"
          landmarkName = "-xmppStreamDidAuthenticate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "402"
-         endingLineNumber = "402"
+         startingLineNumber = "406"
+         endingLineNumber = "406"
          landmarkName = "-xmppStreamDidConnect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
+         startingLineNumber = "404"
+         endingLineNumber = "404"
          landmarkName = "-xmppStreamDidConnect:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/IOSXMPPAppDelegate.m"
-         timestampString = "389171535.704347"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305"
+         startingLineNumber = "309"
+         endingLineNumber = "309"
          landmarkName = "-connect"
          landmarkType = "5">
       </FileBreakpoint>
@@ -199,7 +199,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/LoginViewController.m"
@@ -242,24 +242,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/ChatView.m"
-         timestampString = "389267547.496868"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
-         landmarkName = "-addPopuDialogForSelf"
-         landmarkType = "5">
+         startingLineNumber = "156"
+         endingLineNumber = "156"
+         landmarkName = "@implementation ChatView"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/ChatView.m"
-         timestampString = "389267547.496868"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
          landmarkName = "-configure:config:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,12 +268,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "testXMPP/ChatView.m"
-         timestampString = "389267001.996231"
+         timestampString = "389343919.375001"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
+         startingLineNumber = "303"
+         endingLineNumber = "303"
+         landmarkName = "-animateTextFieldUp:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "testXMPP/ChatView.m"
+         timestampString = "389343919.375001"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
          landmarkName = "-sendMessage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "testXMPP/ContactViewController.m"
+         timestampString = "389344890.618402"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

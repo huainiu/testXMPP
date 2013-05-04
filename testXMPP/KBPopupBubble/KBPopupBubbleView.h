@@ -64,7 +64,7 @@ enum {
 #define kKBPopupMinimumShadowRadius          3.0f
 #define kKBPopupDefaultCornerRadius          12.0f
 #define kKBPopupDefaultAnimationDuration     0.4f
-#define kKBPopupDefaultBorderWidth           4.0f
+#define kKBPopupDefaultBorderWidth           0.0f
 #define kKBPopupDefaultCompletionDelay       0.2f
 #define kKBPopupDefaultShadowOffset          CGSizeMake(5.0f, 5.0f)
 #define kKBPopupDefaultPosition              kKBPopupPointerPositionMiddle

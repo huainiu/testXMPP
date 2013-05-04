@@ -150,6 +150,9 @@
 		F2537487172B873B001391B4 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2537486172B873B001391B4 /* libresolv.dylib */; };
 		F253748D172B8779001391B4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F253748C172B8779001391B4 /* Security.framework */; };
 		F253748F172B87B3001391B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F253748E172B87B3001391B4 /* SystemConfiguration.framework */; };
+		F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */ = {isa = PBXBuildFile; fileRef = F2931A591734A6C5007432AB /* chatPupo.png */; };
+		F2931A611734F721007432AB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2931A601734F721007432AB /* libsqlite3.0.dylib */; };
+		F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2931A64173505A5007432AB /* TECHSqlite3Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -430,6 +433,10 @@
 		F2537486172B873B001391B4 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		F253748C172B8779001391B4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F253748E172B87B3001391B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F2931A591734A6C5007432AB /* chatPupo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatPupo.png; sourceTree = "<group>"; };
+		F2931A601734F721007432AB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		F2931A63173505A5007432AB /* TECHSqlite3Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECHSqlite3Helper.h; sourceTree = "<group>"; };
+		F2931A64173505A5007432AB /* TECHSqlite3Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECHSqlite3Helper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +444,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2931A611734F721007432AB /* libsqlite3.0.dylib in Frameworks */,
 				F2522131173367E400AE5331 /* QuartzCore.framework in Frameworks */,
 				F250C999172BDAAC0056E629 /* CoreLocation.framework in Frameworks */,
 				F250C997172BDAA10056E629 /* CoreData.framework in Frameworks */,
@@ -458,6 +466,7 @@
 		F20DA2F317262A3400000ECE = {
 			isa = PBXGroup;
 			children = (
+				F2931A601734F721007432AB /* libsqlite3.0.dylib */,
 				F2522130173367E400AE5331 /* QuartzCore.framework */,
 				F20DA30817262A3400000ECE /* testXMPP */,
 				F20DA30117262A3400000ECE /* Frameworks */,
@@ -494,6 +503,7 @@
 		F20DA30817262A3400000ECE /* testXMPP */ = {
 			isa = PBXGroup;
 			children = (
+				F2931A6217350584007432AB /* sqlite3 */,
 				F25221231733670C00AE5331 /* KBPopupBubble */,
 				F2537684172BC012001391B4 /* XMPP */,
 				F20DA33E17265E2F00000ECE /* image */,
@@ -553,6 +563,7 @@
 		F20DA33E17265E2F00000ECE /* image */ = {
 			isa = PBXGroup;
 			children = (
+				F2931A591734A6C5007432AB /* chatPupo.png */,
 				F23B63F7173251DA0037190B /* defaultPerson.png */,
 				F20DA3431726600100000ECE /* Shapes_meitu_2.png */,
 			);
@@ -1210,6 +1221,15 @@
 			name = XMPP;
 			sourceTree = "<group>";
 		};
+		F2931A6217350584007432AB /* sqlite3 */ = {
+			isa = PBXGroup;
+			children = (
+				F2931A63173505A5007432AB /* TECHSqlite3Helper.h */,
+				F2931A64173505A5007432AB /* TECHSqlite3Helper.m */,
+			);
+			name = sqlite3;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1277,6 +1297,7 @@
 				F23B63FA173253230037190B /* Localizable.strings in Resources */,
 				F2522100173355E100AE5331 /* ChatView.xib in Resources */,
 				F252212F1733672B00AE5331 /* readme.strings in Resources */,
+				F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1403,6 +1424,7 @@
 				F252212B1733670C00AE5331 /* KBPopupBubbleView+Animations.m in Sources */,
 				F252212C1733670C00AE5331 /* KBPopupBubbleView.m in Sources */,
 				F252212D1733670C00AE5331 /* KBPopupDrawableView.m in Sources */,
+				F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

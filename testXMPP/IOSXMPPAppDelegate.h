@@ -22,6 +22,8 @@
 	XMPPvCardAvatarModule *xmppvCardAvatarModule;
 	XMPPCapabilities *xmppCapabilities;
 	XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
+    XMPPUserCoreDataStorageObject *messageFrom;
+    NSString *textMessage;
     
     NSString *password;
 	
@@ -39,6 +41,8 @@
 @property (nonatomic, strong, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong, readonly) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
+@property(nonatomic, strong)XMPPUserCoreDataStorageObject *messageFrom;
+@property(nonatomic, strong)NSString *textMessage;
 @property(nonatomic) BOOL isXmppConnected;
 @property(nonatomic) BOOL isLogined;
 

@@ -9,19 +9,26 @@
 #import "ChatView.h"
 #import "KBPopupBubbleView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "XMPPMessage.h"
 
 @interface ChatView ()
 @property(retain, nonatomic)UIScrollView *chatScroller;
 @end
 float contentSizeHeight=0;
+float zoomSize = 216;
 @implementation ChatView
-@synthesize chatScroller, messageText, sendBtn;
+@synthesize chatScroller, messageText, sendBtn, userInfo, iOSXMPPAppDelegate;
 
+
+#pragma mark --
+#pragma mark -- Viewcontroller Delegate
 -(void)dealloc
 {
     [chatScroller release];
     [messageText release];
     [sendBtn release];
+    [userInfo release];
+    [iOSXMPPAppDelegate release];
     [super dealloc];
 }
 
@@ -30,6 +37,7 @@ float contentSizeHeight=0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -37,12 +45,37 @@ float contentSizeHeight=0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if(userInfo)
+    {
+        self.title = userInfo.displayName;
+    }
+    
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSString *reciveTextMessage = [change objectForKey:@"new"];
+    if(reciveTextMessage)
+    {
+        [self addPopuDialog:reciveTextMessage];
+    }
 }
 
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    contentSizeHeight = 0; 
+        contentSizeHeight = 0;
+    if(iOSXMPPAppDelegate)
+    {
+        [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.textMessage" options:NSKeyValueObservingOptionNew context:nil];
+    }
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+
+    [self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.textMessage"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,14 +104,36 @@ float contentSizeHeight=0;
 
 -(IBAction)sendMessage:(id)sender
 {
-    [self addPopuDialogForSelf];
-    [self addPopuDialog];
     
-    [self.chatScroller setContentSize:CGSizeMake(self.chatScroller.frame.size.width, contentSizeHeight + 50)];
+    if(iOSXMPPAppDelegate)
+    {
+        NSString *messageContent = self.messageText.text;
+        if(messageContent!=nil &&![messageContent isEqualToString:@""])
+        {
+            //發送消息
+            NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+            [body setStringValue:messageContent];
+            
+            NSXMLElement *message = [NSXMLElement elementWithName:@"message"];
+            [message addAttributeWithName:@"type" stringValue:@"chat"];
+            [message addAttributeWithName:@"to" stringValue:[userInfo.jid full]];
+            [message addChild:body];
+            
+            [self.iOSXMPPAppDelegate.xmppStream sendElement:message];
+    //        iOSXMPPAppDelegate.xmppStream
+            
+            
+            // 在對話介面添加對話氣泡
+            [self addPopuDialogForSelf:messageContent];
+            //[self addPopuDialog];
+            
+            
+            //清空編輯消息文本框
+            self.messageText.text = @"";
+        }
+    }
     
-    [self.chatScroller setContentSize:CGSizeMake(self.chatScroller.frame.size.width, contentSizeHeight)];
-    NSLog(@"contentSize.height:%f", self.chatScroller.contentSize.height);
-    NSLog(@"self.chatScroller.frame.size.height:%f", self.chatScroller.frame.size.height);
+    
     
 }
 
@@ -99,12 +154,12 @@ float contentSizeHeight=0;
 
 #pragma mark ---
 #pragma mark --- 對話氣泡
--(void)addPopuDialogForSelf
+-(void)addPopuDialogForSelf:(NSString *)textMessage
 {
     
     UIView *dialogItemView = [[UIView alloc] initWithFrame:CGRectMake(0.0, contentSizeHeight, 320, 80)];
     
-    NSDictionary *config = [NSDictionary dictionaryWithObjectsAndKeys:@"3", @"side", @"1", @"position",  nil];
+    NSDictionary *config = [NSDictionary dictionaryWithObjectsAndKeys:@"3", @"side", @"1", @"position",@"self", @"object", textMessage, @"message",  nil];
     //對話內容
     KBPopupBubbleView *bubble = [[KBPopupBubbleView alloc] initWithFrame:CGRectMake(20.0, 0.0, 250.00, 80)];
     [self configure:bubble config:config];
@@ -124,12 +179,12 @@ float contentSizeHeight=0;
     contentSizeHeight = contentSizeHeight + 80;
     NSLog(@"contentSizeHeight:%f", contentSizeHeight);
 }
--(void)addPopuDialog
+-(void)addPopuDialog:(NSString *)textMessage
 {
     
     UIView *dialogItemView = [[UIView alloc] initWithFrame:CGRectMake(0.0, contentSizeHeight, 320, 80)];
     
-    NSDictionary *config = [NSDictionary dictionaryWithObjectsAndKeys:@"2", @"side", @"1", @"position",  nil];
+    NSDictionary *config = [NSDictionary dictionaryWithObjectsAndKeys:@"2", @"side", @"1", @"position",@"other",@"object",textMessage, @"message", nil];
     //對話內容
     KBPopupBubbleView *bubble = [[KBPopupBubbleView alloc] initWithFrame:CGRectMake(50.0, 0.0, 250.00, 80)];
     [self configure:bubble config:config];
@@ -153,9 +208,9 @@ float contentSizeHeight=0;
 #pragma mark -- 
 #pragma mark -- 配置對話氣泡
 - (void)configure:(KBPopupBubbleView *)bubble config:(NSDictionary *)config {
-    
+
     // Text
-    bubble.label.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor iLorem ipsum Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor iLorem ipsum";
+    bubble.label.text = [config objectForKey:@"message"];
     bubble.label.textColor = [UIColor blackColor];
     bubble.label.font = [UIFont boldSystemFontOfSize:13.0f];
     //bubble.delegate = self;
@@ -214,13 +269,23 @@ float contentSizeHeight=0;
     //    }
     // bubble.drawableColor = [_colors objectAtIndex:_colorIndex];
     //bubble.borderColor = [_colorsBorder objectAtIndex:_colorIndex];
-    bubble.drawableColor = [UIColor yellowColor];
-    bubble.borderColor = [UIColor redColor];
+    UIColor *color ;
+    NSString *object = [config objectForKey:@"object"];
+    if([object isEqualToString:@"self"])
+    {
+        color = [UIColor colorWithRed:216 green:216 blue:216 alpha:1];
+    }else
+    {
+        color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"chatPupo.png"]];
+    }
+    bubble.drawableColor = color;
+    bubble.borderColor = color;
     // Demonstrate how a completion block works
     void (^completion)(void) = ^{
         [bubble setPosition:0.0f animated:YES];
     };
     [bubble setCompletionBlock:completion forAnimationKey:kKBPopupAnimationPopIn];
+    [self scrollToButtom];
 }
 
 
@@ -237,9 +302,31 @@ float contentSizeHeight=0;
     [UIView setAnimationDuration: movementDuration];
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     
+    CGRect scrollerFrame;
+    if(up)
+    {
+        
+        scrollerFrame = CGRectMake(0.0, zoomSize, self.chatScroller.frame.size.width, self.chatScroller.frame.size.height-zoomSize);
+    }else
+    {
+        scrollerFrame = CGRectMake(0.0, self.chatScroller.frame.origin.y-zoomSize, self.chatScroller.frame.size.width, self.chatScroller.frame.size.height+zoomSize);
+    }
+    [self.chatScroller setFrame:scrollerFrame];
+    [self scrollToButtom];
+    
     [UIView commitAnimations];
 }
 
+-(void)scrollToButtom
+{
+    [self.chatScroller setContentSize:CGSizeMake(self.chatScroller.frame.size.width, contentSizeHeight+80)];
+    
+    if([chatScroller contentSize].height > chatScroller.frame.size.height)
+    {
+        CGPoint bottomOffset = CGPointMake(0, [chatScroller contentSize].height - chatScroller.frame.size.height);
+        [chatScroller setContentOffset:bottomOffset animated:YES];
+    }
+}
 
 
 @end

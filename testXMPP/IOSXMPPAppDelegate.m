@@ -50,6 +50,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize xmppCapabilities;
 @synthesize xmppCapabilitiesStorage;
 @synthesize isXmppConnected, isLogined;
+@synthesize messageFrom;
+@synthesize textMessage;
 
 
 
@@ -69,6 +71,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.xmppCapabilities release];
     [self.xmppCapabilitiesStorage release];
     [self teardownStream];
+    [self.messageFrom release];
+    [self.textMessage release];
     [super dealloc];
 }
 
@@ -432,7 +436,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 	if ([message isChatMessageWithBody])
 	{
-		XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
+		 XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
 		                                                         xmppStream:xmppStream
 		                                               managedObjectContext:[self managedObjectContext_roster]];
 		
@@ -441,12 +445,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
 		{
-			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:displayName
-                                                                message:body
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-			[alertView show];
+            NSLog(@"receive message:%@", body);
+			self.messageFrom = user;
+            self.textMessage = body;
 		}
 		else
 		{
