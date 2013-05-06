@@ -47,15 +47,7 @@ static NSString *dbFilePath = @"invision_im.db";
     // create table if not exsit: messageTable
     
     NSString *messsageTable_sql =
-    @"create table if not exsits messageTable"
-    "("
-        "msgId integer auto increment primary key, "
-        "receiver varchar,"
-        "sender varchar,"
-        "messageContent varchar,"
-        "recordTime datetime,"
-        "readed integer"
-    ")";
+    @"create table if not exists messageTable ( msgId integer, receiver text,sender text,messageContent text,recordTime text,readed integer)";
     if(sqlite3_exec(database, [messsageTable_sql UTF8String], NULL, NULL, &error)!=SQLITE_OK)
     {
         NSAssert(0, @"創建表 messageTable 失敗");
@@ -81,7 +73,7 @@ static NSString *dbFilePath = @"invision_im.db";
     return database;
 }
 
--(void)insertMessage:(NSDictionary *)record table:(NSString *)tableName error:(char **)error
+-(void)insertMessage:(NSDictionary *)record
 {
     char *sql = "insert into messageTable(receiver, sender, messageContent, recordTime, readed) values(?,"
     "?, ?, datetime(), ?)";
@@ -102,10 +94,27 @@ static NSString *dbFilePath = @"invision_im.db";
     sqlite3_close(database);
 }
 
--(NSArray *)queryMesasge:(NSString *)tableName params:(NSDictionary *)params error:(NSError **)error
+-(NSDictionary *)queryMesasge:(NSString *)tableName params:(NSDictionary *)params error:(NSError **)error
 {
-    NSArray *record = nil;
-    
+    NSDictionary *record = nil;
+    char *sql = "select msgId, receiver, sender, messageContent, strftime('%d-%m-%Y %H:%M:%S', recordTime) as recordTime, readed from messageTable";
+    sqlite3_stmt *stmt ;
+    sqlite3 *database = [self openDB];
+    if(sqlite3_prepare(database, sql, -1, &stmt, nil)==SQLITE_OK)
+    {
+        if(sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            record = [[NSDictionary alloc] initWithObjectsAndKeys:
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 1)], @"msgId",
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 2)], @"receiver",
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 3)], @"sender",
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 4)], @"messageContent",
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 5)], @"receiver",
+                      [NSString stringWithUTF8String:(char *)sqlite3_column_int(stmt, 6)], @"recordTime",
+                      [NSString stringWithFormat:@"%i", (int)sqlite3_column_int(stmt, 6)], @"readed",
+                      nil];
+        }
+    }
     return record;
 }
 

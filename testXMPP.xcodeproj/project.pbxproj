@@ -153,6 +153,8 @@
 		F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */ = {isa = PBXBuildFile; fileRef = F2931A591734A6C5007432AB /* chatPupo.png */; };
 		F2931A611734F721007432AB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2931A601734F721007432AB /* libsqlite3.0.dylib */; };
 		F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2931A64173505A5007432AB /* TECHSqlite3Helper.m */; };
+		F2ED0DB717374233009F249E /* TestSQLite3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2ED0DB517374233009F249E /* TestSQLite3ViewController.m */; };
+		F2ED0DB817374233009F249E /* TestSQLite3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2ED0DB617374233009F249E /* TestSQLite3ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -437,6 +439,9 @@
 		F2931A601734F721007432AB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F2931A63173505A5007432AB /* TECHSqlite3Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECHSqlite3Helper.h; sourceTree = "<group>"; };
 		F2931A64173505A5007432AB /* TECHSqlite3Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECHSqlite3Helper.m; sourceTree = "<group>"; };
+		F2ED0DB417374233009F249E /* TestSQLite3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSQLite3ViewController.h; sourceTree = "<group>"; };
+		F2ED0DB517374233009F249E /* TestSQLite3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSQLite3ViewController.m; sourceTree = "<group>"; };
+		F2ED0DB617374233009F249E /* TestSQLite3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSQLite3ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -544,6 +549,9 @@
 				F250C886172BCB940056E629 /* LoginViewController.m */,
 				F25220FC173355E100AE5331 /* ChatView.h */,
 				F25220FD173355E100AE5331 /* ChatView.m */,
+				F2ED0DB417374233009F249E /* TestSQLite3ViewController.h */,
+				F2ED0DB517374233009F249E /* TestSQLite3ViewController.m */,
+				F2ED0DB617374233009F249E /* TestSQLite3ViewController.xib */,
 			);
 			name = classes;
 			sourceTree = "<group>";
@@ -1298,6 +1306,7 @@
 				F2522100173355E100AE5331 /* ChatView.xib in Resources */,
 				F252212F1733672B00AE5331 /* readme.strings in Resources */,
 				F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */,
+				F2ED0DB817374233009F249E /* TestSQLite3ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1425,6 +1434,7 @@
 				F252212C1733670C00AE5331 /* KBPopupBubbleView.m in Sources */,
 				F252212D1733670C00AE5331 /* KBPopupDrawableView.m in Sources */,
 				F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */,
+				F2ED0DB717374233009F249E /* TestSQLite3ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

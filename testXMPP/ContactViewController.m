@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "ChatViewController.h"
 #import "ChatView.h"
+#import "TestSQLite3ViewController.h"
 
 #import "DDLog.h"
 #import <QuartzCore/QuartzCore.h>
@@ -53,8 +54,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //UIBarButtonItem *loginBtn= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(loadLoginViewContoller:)];
-   // self.navigationItem.leftBarButtonItem = loginBtn;
+    UIBarButtonItem *testSQLBtn= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(testSQLite3ViewController:)];
+    self.navigationItem.leftBarButtonItem = testSQLBtn;
+    
+    
     UIBarButtonItem *addContact = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContact:)];
     //[anotherButton setStyle:UIBarButtonItemStyleDone];
     self.navigationItem.rightBarButtonItem = addContact;
@@ -67,6 +70,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 //           forKeyPath:@"iOSXMPPAppDelegate.isLogined"
 //              options:(NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld)
 //              context:nil];
+}
+
+-(void)testSQLite3ViewController:(id)sender
+{
+    TestSQLite3ViewController *testSqlite3 = [[TestSQLite3ViewController alloc] initWithNibName:@"TestSQLite3ViewController" bundle:nil];
+    [self presentViewController:testSqlite3 animated:YES completion:^{}];
 }
 
 //#pragma mark ---
@@ -98,15 +107,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom"];
+    //[self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom"];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     XMPPUserCoreDataStorageObject *messageFrom = (XMPPUserCoreDataStorageObject *)[change objectForKey:@"new"];
-    
-
-    
     
     UITableViewCell *cell = nil;
     

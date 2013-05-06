@@ -10,7 +10,7 @@
 
 @interface TECHSqlite3Helper : NSObject
 
--(void)insertRecord:(NSDictionary *)record table:(NSString *)tableName error:(char **) error;
--(NSArray *)queryTable:(NSString *)tableName params:(NSDictionary *)params error:(NSError **)error;
-
+-(void)insertMessage:(NSDictionary *)record;
+-(NSDictionary *)queryMesasge:(NSString *)tableName params:(NSDictionary *)params error:(NSError **)error;
+-(NSInteger)queryNewMessage;
 @end
