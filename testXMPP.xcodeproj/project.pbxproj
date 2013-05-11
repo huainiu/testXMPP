@@ -153,6 +153,9 @@
 		F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */ = {isa = PBXBuildFile; fileRef = F2931A591734A6C5007432AB /* chatPupo.png */; };
 		F2931A611734F721007432AB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2931A601734F721007432AB /* libsqlite3.0.dylib */; };
 		F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2931A64173505A5007432AB /* TECHSqlite3Helper.m */; };
+		F2BB89B8173B8B850063EAAE /* TDBadgedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB89B2173B891C0063EAAE /* TDBadgedCell.m */; settings = {COMPILER_FLAGS = "-fobj-arc"; }; };
+		F2BB89BA173B8D3F0063EAAE /* messageBagesColor.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BB89B9173B8D3F0063EAAE /* messageBagesColor.png */; };
+		F2BB89BC173B8E670063EAAE /* messageBagesRead.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BB89BB173B8E670063EAAE /* messageBagesRead.png */; };
 		F2ED0DB717374233009F249E /* TestSQLite3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2ED0DB517374233009F249E /* TestSQLite3ViewController.m */; };
 		F2ED0DB817374233009F249E /* TestSQLite3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2ED0DB617374233009F249E /* TestSQLite3ViewController.xib */; };
 /* End PBXBuildFile section */
@@ -439,6 +442,10 @@
 		F2931A601734F721007432AB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		F2931A63173505A5007432AB /* TECHSqlite3Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TECHSqlite3Helper.h; sourceTree = "<group>"; };
 		F2931A64173505A5007432AB /* TECHSqlite3Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TECHSqlite3Helper.m; sourceTree = "<group>"; };
+		F2BB89B1173B891C0063EAAE /* TDBadgedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDBadgedCell.h; sourceTree = "<group>"; };
+		F2BB89B2173B891C0063EAAE /* TDBadgedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDBadgedCell.m; sourceTree = "<group>"; };
+		F2BB89B9173B8D3F0063EAAE /* messageBagesColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBagesColor.png; sourceTree = "<group>"; };
+		F2BB89BB173B8E670063EAAE /* messageBagesRead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messageBagesRead.png; sourceTree = "<group>"; };
 		F2ED0DB417374233009F249E /* TestSQLite3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSQLite3ViewController.h; sourceTree = "<group>"; };
 		F2ED0DB517374233009F249E /* TestSQLite3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSQLite3ViewController.m; sourceTree = "<group>"; };
 		F2ED0DB617374233009F249E /* TestSQLite3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSQLite3ViewController.xib; sourceTree = "<group>"; };
@@ -539,6 +546,8 @@
 		F20DA32517262B0E00000ECE /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				F2BB89B1173B891C0063EAAE /* TDBadgedCell.h */,
+				F2BB89B2173B891C0063EAAE /* TDBadgedCell.m */,
 				F250C99E172BDDFC0056E629 /* Toast+UIView.h */,
 				F250C99F172BDDFC0056E629 /* Toast+UIView.m */,
 				F20DA32717262B4900000ECE /* ChatViewController.h */,
@@ -571,9 +580,11 @@
 		F20DA33E17265E2F00000ECE /* image */ = {
 			isa = PBXGroup;
 			children = (
+				F2BB89B9173B8D3F0063EAAE /* messageBagesColor.png */,
 				F2931A591734A6C5007432AB /* chatPupo.png */,
 				F23B63F7173251DA0037190B /* defaultPerson.png */,
 				F20DA3431726600100000ECE /* Shapes_meitu_2.png */,
+				F2BB89BB173B8E670063EAAE /* messageBagesRead.png */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -1307,6 +1318,8 @@
 				F252212F1733672B00AE5331 /* readme.strings in Resources */,
 				F2931A5A1734A6C5007432AB /* chatPupo.png in Resources */,
 				F2ED0DB817374233009F249E /* TestSQLite3ViewController.xib in Resources */,
+				F2BB89BA173B8D3F0063EAAE /* messageBagesColor.png in Resources */,
+				F2BB89BC173B8E670063EAAE /* messageBagesRead.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,6 +1448,7 @@
 				F252212D1733670C00AE5331 /* KBPopupDrawableView.m in Sources */,
 				F2931A65173505A5007432AB /* TECHSqlite3Helper.m in Sources */,
 				F2ED0DB717374233009F249E /* TestSQLite3ViewController.m in Sources */,
+				F2BB89B8173B8B850063EAAE /* TDBadgedCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

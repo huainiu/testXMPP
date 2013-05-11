@@ -13,6 +13,8 @@
 #import "ChatViewController.h"
 #import "ChatView.h"
 #import "TestSQLite3ViewController.h"
+#import "TECHSqlite3Helper.h"
+#import "TDBadgedCell.h"
 
 #import "DDLog.h"
 #import <QuartzCore/QuartzCore.h>
@@ -25,21 +27,38 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
 @interface ContactViewController ()
-@property(retain, nonatomic)UIBarButtonItem *plusContactBarBtn;
+@property(retain, nonatomic) UIBarButtonItem *plusContactBarBtn;
 @property(retain, nonatomic) IOSXMPPAppDelegate *iOSXMPPAppDelegate;
+@property(retain, nonatomic) TECHSqlite3Helper *sqlite3Helper;
+@property(retain, nonatomic)NSString *messageFrom ;
+@property(retain, nonatomic)NSString *textMessage;
+
 @end
 
 @implementation ContactViewController
-@synthesize segCtl, plusContactBarBtn,tableView, iOSXMPPAppDelegate;
+@synthesize segCtl, plusContactBarBtn,tableView, iOSXMPPAppDelegate, sqlite3Helper, messageFrom, textMessage;
 
 
 -(void)dealloc
 {
-    [self.segCtl release];
-    [self.plusContactBarBtn release];
-    [self.iOSXMPPAppDelegate release];
+    [segCtl release];
+    [plusContactBarBtn release];
+    [iOSXMPPAppDelegate release];
+    [sqlite3Helper release];
+    [messageFrom release];
+    [textMessage release];
     [super dealloc];
 }
+
+-(TECHSqlite3Helper *)sqlite3Helper
+{
+    if(!sqlite3Helper)
+    {
+        sqlite3Helper = [[TECHSqlite3Helper alloc] init];
+    }
+    return sqlite3Helper;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,6 +89,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 //           forKeyPath:@"iOSXMPPAppDelegate.isLogined"
 //              options:(NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld)
 //              context:nil];
+    
+    //有消息發送來時，在tableView 相應的行顯示消息數
+   
 }
 
 -(void)testSQLite3ViewController:(id)sender
@@ -91,7 +113,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark -- viewController delegate
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    NSLog(@"viewWillAppear");
+    NSLog(@"self.textMessage:%@", self.textMessage);
     // 登錄xmpp server
     if (!self.iOSXMPPAppDelegate.isXmppConnected) {
         if(![self.iOSXMPPAppDelegate connect])
@@ -101,34 +124,64 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [loginCtl release];
         }
     }
-    //有消息發送來時，在tableView 相應的行顯示消息數
-    [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom" options:NSKeyValueObservingOptionNew  context:nil];
     
+    
+    [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom" options:NSKeyValueObservingOptionNew  context:nil];
+    [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.textMessage" options:NSKeyValueObservingOptionNew  context:nil];
+    
+    // 重新加載一次
+    [self.tableView reloadData];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    //[self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom"];
+    NSLog(@"viewWillDisappear");
+
+    [self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.messageFrom"];
+    [self removeObserver:self forKeyPath:@"iOSXMPPAppDelegate.textMessage"];
+
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    XMPPUserCoreDataStorageObject *messageFrom = (XMPPUserCoreDataStorageObject *)[change objectForKey:@"new"];
+    NSString *new = [change objectForKey:@"new"];
     
-    UITableViewCell *cell = nil;
-    
-    if(cell)
+    NSLog(@"new1:%@", new);
+    if([new hasPrefix:self.iOSXMPPAppDelegate.kTextMessage])
     {
-        UILabel *msgBadgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(280, 3.0, 10, 10)];
-        msgBadgeLabel.text = @"10";
-        msgBadgeLabel.layer.borderColor = [[UIColor redColor] CGColor];
-        msgBadgeLabel.layer.borderWidth = 3;
-        msgBadgeLabel.layer.cornerRadius = 45;
-        msgBadgeLabel.clipsToBounds = YES;
-
-        
-        [cell addSubview:msgBadgeLabel];
+        self.textMessage = [new stringByReplacingOccurrencesOfString:self.iOSXMPPAppDelegate.kTextMessage withString:@""];
     }
     
+    if([new hasPrefix:self.iOSXMPPAppDelegate.kMessageFrom])
+    {
+        self.messageFrom = [new stringByReplacingOccurrencesOfString:self.iOSXMPPAppDelegate.kMessageFrom withString:@""];
+    }
+    [self insertUnReadedMessage];
+}
+
+-(void)insertUnReadedMessage
+{
+    NSLog(@"---------------self.messgeFrom:%@", self.messageFrom);
+    NSLog(@"---------------self.textMessage:%@", self.textMessage);
+    if(self.messageFrom && self.textMessage)
+    {
+        //插入一條未讀消息記錄到 dby
+        NSDictionary *record = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID],@"receiver",
+                                self.messageFrom,@"sender",
+                                textMessage,@"messageContent",
+                                @"1", @"readed",
+                                nil];
+        
+        [self.sqlite3Helper insertMessage:record];
+        self.messageFrom = nil;
+        self.textMessage = nil;
+        
+        [self.tableView reloadData];
+        
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -273,16 +326,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	static NSString *CellIdentifier = @"Cell";
-	UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil)
-	{
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+	TDBadgedCell *cell = [[TDBadgedCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
-	}
 
-	XMPPUserCoreDataStorageObject *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	
+
+	// set badge
+	int count = [self.sqlite3Helper queryNewMessageCountForUser:user.displayName];
+    if (count>0) {
+        cell.badgeColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"messageBagesRead"]];
+        cell.badge.radius = 6;
+        cell.badge.fontSize = 11;
+        cell.badgeString =  [NSString stringWithFormat:@"%i", count];
+    }else{
+        
+    }
 	cell.textLabel.text = user.displayName;
 	[self configurePhotoForCell:cell user:user];
 	

@@ -52,8 +52,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize isXmppConnected, isLogined;
 @synthesize messageFrom;
 @synthesize textMessage;
-
-
+@synthesize kMessageFrom;
+@synthesize kTextMessage;
 
 
 
@@ -436,7 +436,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 	if ([message isChatMessageWithBody])
 	{
-		 XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
+        XMPPUserCoreDataStorageObject *user = [xmppRosterStorage userForJID:[message from]
 		                                                         xmppStream:xmppStream
 		                                               managedObjectContext:[self managedObjectContext_roster]];
 		
@@ -445,9 +445,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
 		if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
 		{
+            //NSLog(@"uuid:%@", [self createUUID]);
             NSLog(@"receive message:%@", body);
-			self.messageFrom = user;
-            self.textMessage = body;
+            NSLog(@"recevier:%@", displayName);
+			self.messageFrom = [self.kMessageFrom stringByAppendingString:displayName];
+            self.textMessage = [self.kTextMessage stringByAppendingString:body];
 		}
 		else
 		{
@@ -528,5 +530,35 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 	
 }
 
+- (NSString *)createUUID
+{
+    // Create universally unique identifier (object)
+    CFUUIDRef uuidObject = CFUUIDCreate(kCFAllocatorDefault);
+    
+    // Get the string representation of CFUUID object.
+    NSString *uuidStr = (NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuidObject);
+    
+    // If needed, here is how to get a representation in bytes, returned as a structure
+    // typedef struct {
+    //   UInt8 byte0;
+    //   UInt8 byte1;
+    //   …
+    //   UInt8 byte15;
+    // } CFUUIDBytes;
+    CFUUIDBytes bytes = CFUUIDGetUUIDBytes(uuidObject);
+    
+    CFRelease(uuidObject);
+    
+    return uuidStr;
+}
+
+-(NSString *)kMessageFrom
+{
+    return @"2A80E3C0-C93C-4C2B-B64D-0C2078AE8B28";
+}
+-(NSString *)kTextMessage
+{
+    return @"E2E27553-0659-4D0A-A707-7748DFEFD11B";
+}
 
 @end

@@ -14,7 +14,7 @@
 @end
 
 @implementation TestSQLite3ViewController
-@synthesize insertBtn, query1Btn, query2Btn, sqlite3Helper;
+@synthesize insertBtn, query1Btn, query2Btn, sqlite3Helper, delBtn;
 
 -(void)dealloc
 {
@@ -22,6 +22,7 @@
     [query1Btn release];
     [query2Btn release];
     [sqlite3Helper release];
+    [delBtn release];
     [super dealloc];
 }
 
@@ -57,11 +58,11 @@
 - (IBAction)testInsert:(id)sender
 {
     NSDictionary *record1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            @"receiver",@"yjn",
-                            @"sender", @"yjn1",
-                            @"messageContent", @"hello",
-                            @"recordTime", @"2013-05-06 10:12",
-                            @"readed", @"1",
+                            @"yjn55",@"receiver",
+                             @"yjn14",@"sender",
+                            @"hello4",@"messageContent",
+                             @"2013-05-06 10:12",@"recordTime",
+                            @"1", @"readed",
                             nil];
 
     [[self sqlite3Helper] insertMessage:record1];
@@ -69,8 +70,21 @@
 
 - (IBAction)testQuery1:(id)sender
 {
+    NSLog(@"new count:%@", [(NSDictionary *)[[self sqlite3Helper] queryNewMesasgeForUser:@"yjn1"] description]);
 }
 
-- (IBAction)testQuery2:(id)sender {
+- (IBAction)testQuery2:(id)sender
+{
+    NSLog(@"%@", [(NSDictionary *)[[self sqlite3Helper] queryNewMesasgeForUser:@"yjn1"] description]);
+}
+
+-(IBAction)delRow:(id)sender
+{
+    [[self sqlite3Helper] delRow];
+}
+
+-(IBAction)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 @end

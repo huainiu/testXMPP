@@ -6,9 +6,14 @@
 //  Copyright (c) 2013 techrare. All rights reserved.
 //
 
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "XMPPFramework.h"
+
+
+//NSString *const ;
+//NSString *const 
 
 
 @interface IOSXMPPAppDelegate : NSObject<XMPPRosterDelegate>
@@ -22,8 +27,7 @@
 	XMPPvCardAvatarModule *xmppvCardAvatarModule;
 	XMPPCapabilities *xmppCapabilities;
 	XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-    XMPPUserCoreDataStorageObject *messageFrom;
-    NSString *textMessage;
+    
     
     NSString *password;
 	
@@ -41,10 +45,12 @@
 @property (nonatomic, strong, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong, readonly) XMPPCapabilities *xmppCapabilities;
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-@property(nonatomic, strong)XMPPUserCoreDataStorageObject *messageFrom;
+@property(nonatomic, strong)NSString *messageFrom;
 @property(nonatomic, strong)NSString *textMessage;
 @property(nonatomic) BOOL isXmppConnected;
 @property(nonatomic) BOOL isLogined;
+@property(nonatomic, strong, readonly)NSString *kMessageFrom;
+@property(nonatomic, strong, readonly)NSString *kTextMessage;
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;

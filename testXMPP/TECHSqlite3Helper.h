@@ -11,6 +11,8 @@
 @interface TECHSqlite3Helper : NSObject
 
 -(void)insertMessage:(NSDictionary *)record;
--(NSDictionary *)queryMesasge:(NSString *)tableName params:(NSDictionary *)params error:(NSError **)error;
--(NSInteger)queryNewMessage;
+-(NSArray *)queryNewMesasgeForUser:(NSString *)user;
+-(NSInteger)queryNewMessageCountForUser:(NSString *)user;
+-(void)updateMessageReadedForUser:(NSString *)user;
+-(void)delRow;
 @end

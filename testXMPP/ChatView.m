@@ -10,14 +10,18 @@
 #import "KBPopupBubbleView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "XMPPMessage.h"
+#import "TECHSqlite3Helper.h"
 
 @interface ChatView ()
+
 @property(retain, nonatomic)UIScrollView *chatScroller;
+@property(retain, nonatomic)TECHSqlite3Helper *sqliteHelper;
+
 @end
-float contentSizeHeight=0;
+static float contentSizeHeight=0;
 float zoomSize = 216;
 @implementation ChatView
-@synthesize chatScroller, messageText, sendBtn, userInfo, iOSXMPPAppDelegate;
+@synthesize chatScroller, messageText, sendBtn, userInfo, iOSXMPPAppDelegate, sqliteHelper;
 
 
 #pragma mark --
@@ -29,7 +33,17 @@ float zoomSize = 216;
     [sendBtn release];
     [userInfo release];
     [iOSXMPPAppDelegate release];
+    [sqliteHelper release];
     [super dealloc];
+}
+
+-(TECHSqlite3Helper *)sqliteHelper
+{
+    if(!sqliteHelper)
+    {
+        sqliteHelper = [[TECHSqlite3Helper alloc] init];
+    }
+    return sqliteHelper;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,6 +64,7 @@ float zoomSize = 216;
         self.title = userInfo.displayName;
     }
     
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -57,17 +72,27 @@ float zoomSize = 216;
     NSString *reciveTextMessage = [change objectForKey:@"new"];
     if(reciveTextMessage)
     {
-        [self addPopuDialog:reciveTextMessage];
+        [self addPopuDialog:[reciveTextMessage stringByReplacingOccurrencesOfString:self.iOSXMPPAppDelegate.kTextMessage withString:@""]];
     }
 }
 
 
 -(void)viewWillAppear:(BOOL)animated
 {
-        contentSizeHeight = 0;
+    contentSizeHeight = 0;
     if(iOSXMPPAppDelegate)
     {
         [self addObserver:self forKeyPath:@"iOSXMPPAppDelegate.textMessage" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    
+    //顯示所有未讀的消息
+    NSArray *unReadedMessages = [self.sqliteHelper queryNewMesasgeForUser:userInfo.displayName];
+    for (int i=0; i<[unReadedMessages count]; i++) {
+        NSLog(@"message:%@", [(NSDictionary *)[unReadedMessages objectAtIndex:i] description]);
+        [self addPopuDialog:[(NSDictionary *)[unReadedMessages objectAtIndex:i] objectForKey:@"messageContent"]];
+    }
+    if (unReadedMessages) {
+        [self.sqliteHelper updateMessageReadedForUser:userInfo.displayName];
     }
 
 }
@@ -125,7 +150,7 @@ float zoomSize = 216;
             
             // 在對話介面添加對話氣泡
             [self addPopuDialogForSelf:messageContent];
-            //[self addPopuDialog];
+            
             
             
             //清空編輯消息文本框
@@ -202,7 +227,7 @@ float zoomSize = 216;
     [self.chatScroller addSubview:dialogItemView];
     
     contentSizeHeight = contentSizeHeight + 80;
-    NSLog(@"contentSizeHeight:%f", contentSizeHeight);
+    NSLog(@"contentSizeHeighta:%f", contentSizeHeight);
 }
 
 #pragma mark -- 
@@ -305,7 +330,6 @@ float zoomSize = 216;
     CGRect scrollerFrame;
     if(up)
     {
-        
         scrollerFrame = CGRectMake(0.0, zoomSize, self.chatScroller.frame.size.width, self.chatScroller.frame.size.height-zoomSize);
     }else
     {
@@ -319,6 +343,7 @@ float zoomSize = 216;
 
 -(void)scrollToButtom
 {
+    NSLog(@"contentSizeHeight:::%f", contentSizeHeight);
     [self.chatScroller setContentSize:CGSizeMake(self.chatScroller.frame.size.width, contentSizeHeight+80)];
     
     if([chatScroller contentSize].height > chatScroller.frame.size.height)
